@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { makeImagesSmaller } from '../utils';
 
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -6,13 +8,24 @@ import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 
 const GameDetail = () => {
-    const {screen, game, isLoading} = useSelector((state) => state.detail);
+    const history = useHistory();
+    //Exit detail screen
+    const exitDetail = (e) => {
+        const element = e.target;
+        console.log(element);
+        if(element.classList.contains('shadow')) {
+            document.body.style.overflow = 'auto';
+            history.push('/')
+        }
 
+    }
+    //Data
+    const {screen, game, isLoading} = useSelector((state) => state.detail);
 
     return (
      <>
      {!isLoading && (
-    <CardShadow>
+    <CardShadow className='shadow' onClick={exitDetail}>
        <Detail>
            <Stats>
                <div className="rating">
@@ -29,14 +42,14 @@ const GameDetail = () => {
                 </Info>
             </Stats>
             <Media>
-                <img src={game.background_image} alt={screen.id} />
+                <img src={makeImagesSmaller(game.background_image, 1280)} alt={screen.id} />
             </Media>
             <Description>
                <p>{game.description_raw}</p> 
             </Description>
             <div className="gallery">
                 {screen.results.map(screen => (
-                    <img src={screen.image} key={screen.id} alt={screen.id} />
+                    <img src={makeImagesSmaller(screen.image, 1280)} key={screen.id} alt={screen.id} />
                 ))}
             </div>
         </Detail>  
@@ -90,6 +103,9 @@ const Info = styled(motion.div)`
 const Platforms = styled(motion.div)`
     display: flex;
     justify-content: space-evenly;
+    h3{
+        margin-left: 0.5rem
+    }
     img {
         margin-left: 3rem;
     }
