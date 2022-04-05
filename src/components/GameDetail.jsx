@@ -7,8 +7,35 @@ import { motion } from 'framer-motion';
 
 import { useSelector } from 'react-redux';
 
+//Images
+import nintendo from '../img/nintendo.jpg';
+import playstation from '../img/playstation.jpeg';
+import xbox from '../img/xbox.png';
+import pc from '../img/pc.png';
+import apple from '../img/apple.png';
+import gamepad from '../img/gamepad.png';
+
+
 const GameDetail = ({pathId}) => {
     const history = useHistory();
+
+    //get platforms
+    const getPlatforms = (platform) => {
+        switch(platform) {
+            case 'PlayStation 4' || 'PlayStation 5':
+                return playstation;
+            case 'Xbox Series S/X' || 'Xbox One':
+                return xbox;
+            case 'PC':
+                return pc;
+            case 'Nintendo Switch':
+                return nintendo;
+            case 'iOS':
+                return apple;
+            default: return gamepad;
+        }
+    }
+
     //Exit detail screen
     const exitDetail = (e) => {
         const element = e.target;
@@ -36,7 +63,9 @@ const GameDetail = ({pathId}) => {
                     <h3>Platforms</h3>
                     <Platforms>
                         {game.platforms.map(data => (
-                            <h3 key={data.platform.id}>{data.platform.name}</h3>
+                            <img key={data.platform.id}
+                            src={getPlatforms(data.platform.name)}
+                            ></img>
                         ))}
                     </Platforms>
                 </Info>
@@ -78,6 +107,7 @@ const CardShadow = styled(motion.div)`
     &::-webkit-scrollbar-track {
         background:white;
     }
+    z-index: 10;
     
 `
 
@@ -110,7 +140,8 @@ const Platforms = styled(motion.div)`
         margin-left: 0.5rem
     }
     img {
-        margin-left: 3rem;
+        margin-left: 2rem;
+        width: 5%;
     }
 
 `
