@@ -46,5 +46,6 @@ const new_games = `games?key=${process.env.REACT_APP_API_KEY}&dates=${lastYear},
  //Screenshots
  export const gameScreenShotsURL = (game_id) => `${base_url}games/${game_id}/screenshots?key=${process.env.REACT_APP_API_KEY}`
 
-
+//Searched game
+export const searchedGameUrl = (game_name) => `${base_url}games?key=${process.env.REACT_APP_API_KEY}&search=${game_name}&page_size=9`
 

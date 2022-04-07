@@ -9,11 +9,12 @@ import { useSelector } from 'react-redux';
 
 //Images
 import nintendo from '../img/nintendo.jpg';
-import playstation from '../img/playstation.jpeg';
+import playstation from '../img/ps5.png';
 import xbox from '../img/xbox.png';
 import pc from '../img/pc.png';
 import apple from '../img/apple.png';
 import gamepad from '../img/gamepad.png';
+import ps4 from '../img/ps4.png';
 
 
 const GameDetail = ({pathId}) => {
@@ -22,7 +23,9 @@ const GameDetail = ({pathId}) => {
     //get platforms
     const getPlatforms = (platform) => {
         switch(platform) {
-            case 'PlayStation 4' || 'PlayStation 5':
+            case 'PlayStation 4': 
+                return ps4;
+            case 'PlayStation 5':
                 return playstation;
             case 'Xbox Series S/X' || 'Xbox One':
                 return xbox;
